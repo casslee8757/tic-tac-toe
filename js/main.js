@@ -108,7 +108,7 @@ $(function(){
             //update them in html 
             $('.grid-box').html('')
             //return to player 1 
-            playerTurn=0;
+            playerTurn = 0;
             turn.html("CHOOSE THE PLAYER");
             $gameStart();
             
