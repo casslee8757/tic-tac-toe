@@ -6,14 +6,17 @@ let playerScore1 = 0;
 let playerScore2 = 0;
 
 // debugger
-//all winning posibilities (first 3 = horizontal , next 3 = vertical , last 2 = diagonal )
+//all winning posibilities 
 const winningPossibilities = [
+    //horizontal
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
+    //vertical
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
+    //diagonal 
     [0, 4, 8],
     [2, 4, 6]
 ];
@@ -49,7 +52,7 @@ $(function(){
                 turn.hide()
                 turn.fadeIn(400)
                 //player1 input when switch turns 
-                turn.html("PLAYER 1")
+                turn.html("TURN : PLAYER 1")
                 //update player1 value('O') to the board 
                 board[gridToNum] = player1;
     
@@ -63,9 +66,10 @@ $(function(){
                 turn.hide()
                 turn.fadeIn(400)
                 //player2 input when switch turns 
-                turn.html("PLAYER 2")
+                turn.html("TURN : PLAYER 2")
                 //update player2 value('X') to the board 
                 board[gridToNum] = player2;
+                
             }        
             //check winning function runs here 
             checkWinningStatus();
@@ -120,7 +124,7 @@ $(function(){
         $('.game-reset').on('click', function(){
             //update the board array with empty strings
             board = [ '', '', '', '', '', '', '', '', ''];
-            //update them in html 
+            //empty grid boxes 
             $('.grid-box').empty();
             //return to player 1 
             playerTurn = 0;
@@ -137,26 +141,57 @@ $(function(){
 
         })
 
-
+        
         $('#player1').on('click', function(){
             turn.hide()
             turn.fadeIn(400)
             turn.html("PLAYER 1")
+            playerTurn = 0; 
+            player1;
 
+            if($(this) === 'Player 1'){
+                
+                const gridId = eachBoxes.attr("id");
+                const gridToNum = parseInt(gridId)
+                board[gridToNum] = player1;
+                eachBoxes.html(player1); //"O"
+                playerTurn = 1; 
+                console.log(board[gridToNum])
+
+                
+            }else{
+                const randomPlay = Math.round(Math.random() * 8)
+                board[randomPlay] = player2
+                eachBoxes.html(player2); // 'X' input 
+                playerTurn = 0; 
+
+                // aiPlayer();
+            }
 
         })
-
-
+        
         $('#player2').on('click', function(){
             turn.hide()
             turn.fadeIn(400)
             turn.html("PLAYER 2")
-
+            playerTurn = 1;
 
         })
 
+
+        // const aiPlayer = function(){
+        //     console.log(board)
+        //     const randomPlay = Math.round(Math.random() * 8)
+        //     board[randomPlay] = player1
+        //     board[randomPlay] = player2
+
+
+
+        //     console.log(randomPlay);
+        // }
         
     $gameStart(); //starting the function by calling it
+    // aiPlayer();
 
 })//jquery function
 

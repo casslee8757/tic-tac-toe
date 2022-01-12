@@ -169,3 +169,22 @@ h1 {
 .choosePlayerButton:focus {
   border-style: inset;
 }
+
+@media only screen and (max-width: 768px) {
+  .body-container {
+    height: 420px;
+    width: 80%;
+  }
+  .container {
+    width: 100%;
+  }
+  .grid-box {
+    width: 100%;
+    height: 90px;
+    font-size: 60px;
+  }
+  .grid-container {
+    width: 50%;
+    height: 50%;
+  }
+}
