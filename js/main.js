@@ -1,9 +1,8 @@
 //dafualt game status 
 let gameActive = true;
-
-let player1 = "X"
-let player2= "O"
-
+let player1 = "O"
+let player2 = "X"
+// debugger
 //all winning posibilities (first 3 = horizontal , next 3 = vertical , last 2 = diagonal )
 const winningPossibilities = [
     [0, 1, 2],
@@ -16,6 +15,7 @@ const winningPossibilities = [
     [2, 4, 6]
 ];
 
+//empty board array 
 let board = [ '', '', '', '', '', '', '', '', ''];
 
 //Jquery function starts 
@@ -27,36 +27,44 @@ $(function(){
     
     //default player turn 
     let playerTurn = 0;
-    // debugger
-        //
-        $clickEvent = eachBoxes.one('click', function(){
+
+        //game start function 
+        $gameStart = eachBoxes.one('click', function(){
+            //call grid id from html using attr
             const gridId = $(this).attr("id");
+            //change the string value to integer 
             const gridToNum = parseInt(gridId)
-
-            console.log('clicked')
+            
             if(playerTurn === 0){
-                $(this).html("O");
+                //printing visual inputs on the screen 
+                //printing 'O' in the grid 
+                $(this).html(player1);
                 $(this).css('color', '#27005e')
-                playerTurn = 1;
-                turn.html("Player 1")
-                board[gridToNum] = "O";
-                console.log(board)
-            
                 
+                //switch player 
+                playerTurn = 1;
+                //player input 1 for switch turns 
+                turn.hide()
+                turn.fadeIn(1000)
+                turn.html("Player 1")
+                
+                //push player1 value to the board 
+                board[gridToNum] = player1;
+    
             }else{
-                $(this).html("X");
+                $(this).html(player2);
                 $(this).css('color', '#7a36a1')
+                //switch player to 0
                 playerTurn = 0;
+                turn.hide()
+                turn.fadeIn(1000)
                 turn.html("Player 2")
-                board[gridToNum] = "X";
-                console.log(board)
-
-            }
-            
+                
+                board[gridToNum] = player2;
+            }        
             //check winning function runs here 
             checkWinningStatus();
         });//end of clickevent 
-
 
         //winning status function
         const checkWinningStatus = function(){
@@ -70,38 +78,48 @@ $(function(){
                 let c = winning[2]
                 
                 //call the grid box id from html and loop them
-                const contentA = board[a];
-                const contentB = board[b];
-                const contentC = board[c];
+                let contentA = board[a];
+                let contentB = board[b];
+                let contentC = board[c];
 
-                // console.log(a, contentA);
-                // console.log(b, contentB);
-                // console.log(c, contentC);
-
-                // console.log('------');
-
+                //compare the 3 loop variables to check 
                 if (contentA === contentB && contentB === contentC && contentA !== "") {
-                    $clickEvent = eachBoxes.off('click');
-                    gameActive = false;
+                    //if player wins the game turn off click event 
+                    $clickEvent = eachBoxes.off('click');                    
                     console.log('game over');
                     turn.html("Game over");
                     return
-                    
-                }
-                // else{
-                //     console.log('draw')
-                // }
-                //counter variables that can save how many time the border have clicked 
 
+                //draw = if the board does not include [''] string then return draw    
+                }else if(!board.includes('')){
+                    console.log('draw');
+                    turn.html("Draw");
+                
+                } //end of if statement 
+                
             }// closing for 
         } // function checkwinningstatus
-
-
         
-        // $('.reset-button').on('click'){
-        //     if()
-        //     $clickEvent = null;
-        // }
+        
+        //reset function
+        $('.reset-button').on('click', function(){
+            //update the board array with empty strings
+            board = [ '', '', '', '', '', '', '', '', ''];
+            //update them in html 
+            $('.grid-box').html('')
+            //return to player 1 
+            playerTurn=0;
+            turn.html("CHOOSE THE PLAYER");
+            $gameStart();
+            
+        })
+            
+        $('#playerO').on('click', function(){
+            console.log('clicked')
+        })
+    
+            
+        
 
 })//jquery function
 
