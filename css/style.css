@@ -75,18 +75,22 @@ h1 {
   position: relative;
 }
 
-.player-switch {
-  /* position: absolute; */
+.screen-box {
   display: flex;
   flex-direction: column;
+  background-color: #ecd8ec;
+  margin: 30px 0px 15px 0px;
+  border-radius: 5px;
+}
+
+.player-switch {
   font-family: "Ubuntu", sans-serif;
   color: #553c6d;
   font-weight: bold;
-  background-color: #ecd8ec;
-  width: 130px;
+  height: 20px;
+  width: 100px;
+  line-height: 20px;
   text-align: center;
-  margin: 30px 0px 15px 0px;
-  border-radius: 5px;
   padding: 5px;
 }
 
@@ -128,25 +132,26 @@ h1 {
   color: #2e3030;
 }
 
-.buttonplayer1 {
+.scoreplayer1 {
   position: absolute;
-  margin: 30px 260px 0 0;
+  margin: 0px 260px 0 0;
 }
 
-.buttonplayer2 {
+.scoreplayer2 {
   position: absolute;
-  margin: 30px 0px 0 260px;
+  margin: 0px 0px 0 260px;
 }
 
-.button-player1 {
+.score-player1 {
   border: none;
   font-size: 30px;
   background-color: #fbeefc;
   font-family: "Nunito", sans-serif;
   font-weight: bold;
   color: #2a1542;
+  margin-bottom: 0px;
 }
 
-.button-player1:hover {
+/* .score-player1:hover {
   background-color: #ecd8ec;
-}
+} */
