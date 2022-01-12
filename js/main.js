@@ -47,9 +47,9 @@ $(function(){
                 playerTurn = 1;
                 //fade in and out effect for player1 
                 turn.hide()
-                turn.fadeIn(1000)
+                turn.fadeIn(400)
                 //player1 input when switch turns 
-                turn.html("Player 1")
+                turn.html("PLAYER 1")
                 //update player1 value('O') to the board 
                 board[gridToNum] = player1;
     
@@ -61,9 +61,9 @@ $(function(){
                 playerTurn = 0;
                 //fade in and out effect for player2
                 turn.hide()
-                turn.fadeIn(1000)
+                turn.fadeIn(400)
                 //player2 input when switch turns 
-                turn.html("Player 2")
+                turn.html("PLAYER 2")
                 //update player2 value('X') to the board 
                 board[gridToNum] = player2;
             }        
@@ -98,39 +98,64 @@ $(function(){
                     if (playerTurn === 1){
                         playerScore1++;
                         $('#score1').html(playerScore1);
-                        turn.html("Player 1 wins");
+                        turn.html("PLAYER 1 WINS");
+                        
+
 
                     }else{
                         playerScore2++;                       
                         $('#score2').html(playerScore2);
-                        turn.html("Player 2 wins");
-
+                        turn.html("PLAYER 2 WINS");
+                        
                     } //end of
 
                 //draw = if the board does not include [''] string then return draw    
                 }else if(!board.includes('')){
-                    turn.html("Draw"); // print draw input on the screen     
+                    turn.html("DRAW"); // print draw input on the screen     
                 } //end of if statement    
             }// closing for 
         } // function checkwinningstatus
         
         //reset function
-        $('.reset-button').on('click', function(){
+        $('.game-reset').on('click', function(){
             //update the board array with empty strings
             board = [ '', '', '', '', '', '', '', '', ''];
             //update them in html 
             $('.grid-box').empty();
             //return to player 1 
             playerTurn = 0;
-            turn.html("START");//print choose the player on the screen 
+            turn.html("CHOOSE PLAYER");//print choose the player on the screen 
             //return to gameStart
             $gameStart();
         })//end of resetbutton function
-            
-        // $('#playerO').on('click', function(){
-        //     console.log('clicked')
-        // })
-    
+        
+        $('.score-reset').on('click', function(){
+            playerScore1 = 0;
+            playerScore2 = 0;
+            $('#score1').html('0')
+            $('#score2').html('0')
+
+        })
+
+
+        $('#player1').on('click', function(){
+            turn.hide()
+            turn.fadeIn(400)
+            turn.html("PLAYER 1")
+
+
+        })
+
+
+        $('#player2').on('click', function(){
+            turn.hide()
+            turn.fadeIn(400)
+            turn.html("PLAYER 2")
+
+
+        })
+
+        
     $gameStart(); //starting the function by calling it
 
 })//jquery function

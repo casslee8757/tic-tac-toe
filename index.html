@@ -20,16 +20,16 @@
         <h1>Tic-Tac-Toe</h1>
     
     <div class="choose-player">
-        <p id="player1">Player 1</p>
+        <button id="player1" class="choosePlayerButton">Player 1</button>
         <div class='scoreplayer1'>
             <p class="score-player1" id="score1">0</p>
         </div>
-        <div class="screen-box">
-            <div class="player-switch">
-            <span id="turn">START</span>
-            </div>
+        
+        <div class="player-switch">
+            <span id="turn" >CHOOSE PLAYER</span>
+            
         </div>
-        <p id="player2">Player 2</p>
+        <button id="player2" class="choosePlayerButton">Player 2</button>
         <div class="scoreplayer2"> 
             <p class="score-player1" id="score2">0</p>
         </div> 
@@ -50,8 +50,13 @@
         <div id="8" class="grid-box"></div>
     </div>
     </div>
+    
+    <div class="button-text">
+    </div>
     <div class="buttons">
-    <button class="reset-button">Reset</button> 
+        <p id="reset-text">RESET</p>
+        <button class="game-reset" id="reset-button">Game</button> 
+        <button class="score-reset" id="reset-button">Score</button>
     </div>
 
     </div>
