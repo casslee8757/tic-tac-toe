@@ -10,6 +10,11 @@ h1 {
   margin: 5px 0px 25px 0px;
   padding: 0;
 }
+
+.multi-colour {
+  display: flex;
+  flex-direction: row;
+}
 /* Dropdown button*/
 .dropdown-colourtheme {
   border-radius: 5px;
@@ -57,6 +62,11 @@ h1 {
   background: #dcbde2;
 }
 
+.modeChange {
+  text-align: end;
+}
+
+/* grid setting */
 .body-container {
   background-color: #fbeefc;
   width: 500px;

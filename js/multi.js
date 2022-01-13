@@ -134,37 +134,37 @@ $(function(){
     //colour theme
 
     $("#theme2").on('click', function(){
-        $('body').addClass('theme2');
-        $('h1').removeClass('color').addClass('theme2');
-        $('.grid-container').removeClass('background').addClass('theme2');
-        $('.grid-box').removeClass('border').addClass('theme2');
-        $('.body-container').removeClass('background').addClass('theme2');
-        $('.score-player1').removeClass('background').addClass('theme2');
-        $('.grid-box:hover').removeClass('background').addClass('theme2');
-        $('.resetbutton').removeClass('background').addClass('theme2');
-        $('.resetbutton:hover').removeClass('background').addClass('theme2');
-        $('.player-switch').removeClass('background').addClass('theme2');
-        $('.dropdown-colourtheme').removeClass('background').addClass('theme2');
-        $('.dropdown-colourtheme:hover').removeClass('background').addClass('theme2');
-        $('.button-container:hover .dropdown-colourtheme').removeClass('background').addClass('theme2');
+        $('body').removeClass('theme3').addClass('theme2');
+        $('h1').removeClass('theme3','color').addClass('theme2');
+        $('.grid-container').removeClass('theme3','background').addClass('theme2');
+        $('.grid-box').removeClass('theme3','border').addClass('theme2');
+        $('.body-container').removeClass('theme3','background').addClass('theme2');
+        $('.score-player1').removeClass('theme3','background').addClass('theme2');
+        $('.grid-box:hover').removeClass('theme3','background').addClass('theme2');
+        $('.resetbutton').removeClass('theme3','background').addClass('theme2');
+        $('.resetbutton:hover').removeClass('theme3','background').addClass('theme2');
+        $('.player-switch').removeClass('theme3','background').addClass('theme2');
+        $('.dropdown-colourtheme').removeClass('theme3','background').addClass('theme2');
+        $('.dropdown-colourtheme:hover').removeClass('theme3','background').addClass('theme2');
+        $('.button-container:hover .dropdown-colourtheme').removeClass('theme3','background').addClass('theme2');
         
     })
     
     $("#theme3").on('click', function(){
 
-        $('body').addClass('theme3');
-        $('h1').removeClass('color').addClass('theme3');
-        $('.grid-container').removeClass('background').addClass('theme3');
-        $('.grid-box').removeClass('border').addClass('theme3');
-        $('.body-container').removeClass('background').addClass('theme3');
-        $('.score-player1').removeClass('background').addClass('theme3');
-        $('.grid-box:hover').removeClass('background').addClass('theme3');
-        $('.resetbutton').removeClass('background').addClass('theme3');
-        $('.resetbutton:hover').removeClass('background').addClass('theme3');
-        $('.player-switch').removeClass('background').addClass('theme3');
-        $('.dropdown-colourtheme').removeClass('background').addClass('theme3');
-        $('.dropdown-colourtheme:hover').removeClass('background').addClass('theme3');
-        $('.button-container:hover .dropdown-colourtheme').removeClass('background').addClass('theme3');
+        $('body').removeClass('theme2').addClass('theme3');
+        $('h1').removeClass('theme2','color').addClass('theme3');
+        $('.grid-container').removeClass('theme2','background').addClass('theme3');
+        $('.grid-box').removeClass('theme2','border').addClass('theme3');
+        $('.body-container').removeClass('theme2','background').addClass('theme3');
+        $('.score-player1').removeClass('theme2','background').addClass('theme3');
+        $('.grid-box:hover').removeClass('theme2','background').addClass('theme3');
+        $('.resetbutton').removeClass('theme2','background').addClass('theme3');
+        $('.resetbutton:hover').removeClass('theme2','background').addClass('theme3');
+        $('.player-switch').removeClass('theme2','background').addClass('theme3');
+        $('.dropdown-colourtheme').removeClass('theme2','background').addClass('theme3');
+        $('.dropdown-colourtheme:hover').removeClass('theme2','background').addClass('theme3');
+        $('.button-container:hover .dropdown-colourtheme').removeClass('theme2','background').addClass('theme3');
         
     })
     
