@@ -1,3 +1,4 @@
+/*--theme1--*/
 body {
   background-color: #f3e5f5;
 }
@@ -6,8 +7,53 @@ h1 {
   text-align: center;
   color: #af8eb5;
   font-family: "Nunito", sans-serif;
-  margin: 30px 0px 25px 0px;
+  margin: 5px 0px 25px 0px;
   padding: 0;
+}
+/* Dropdown button*/
+.dropdown-colourtheme {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  background-color: #ecd8ec;
+  font-family: "Spline Sans", sans-serif;
+  font-size: 10px;
+  color: #837483;
+  margin-left: 5px;
+}
+.button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 65px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  font-size: 10px;
+  font-family: "Spline Sans", sans-serif;
+  text-align: center;
+  z-index: 1;
+  margin-left: 5px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.button-container:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.button-container:hover .dropdown-colourtheme {
+  background: #dcbde2;
 }
 
 .body-container {
@@ -32,6 +78,7 @@ h1 {
   grid-gap: 10px;
 }
 
+/*content of grid box*/
 .grid-box {
   border: 1px solid #883997;
   padding: auto;
@@ -40,7 +87,7 @@ h1 {
   height: 120px;
   font-size: 120px;
   text-align: center;
-  font-family: "Indie Flower", cursive;
+  font-family: "Margarine", cursive;
   color: #4a148c;
   line-height: 120px;
 }
@@ -50,6 +97,7 @@ h1 {
   cursor: pointer;
 }
 
+/* Bottom : for reset-game, score buttons */
 .buttons {
   text-align: center;
   margin-top: 10px;
@@ -62,7 +110,7 @@ h1 {
   font-size: small;
 }
 
-#reset-button {
+.resetbutton {
   border-radius: 5px;
   border: none;
   padding: 5px;
@@ -70,17 +118,16 @@ h1 {
   font-family: "Spline Sans", sans-serif;
 }
 
-#reset-button:hover {
+.resetbutton:hover {
   background-color: #e9cae9;
 }
 
+/* Middle : screen board */
 .choose-player {
   display: flex;
   flex-direction: row;
   justify-content: center;
   position: relative;
-
-  /* margin-bottom: 100px; */
 }
 
 .player-switch {
@@ -115,7 +162,7 @@ h1 {
     opacity: 1;
   }
 }
-
+/**/
 #player1 {
   position: absolute;
   margin: 0px 260px 0px 0px;
@@ -129,8 +176,6 @@ h1 {
   position: absolute;
   margin: 0px 0px 0 260px;
   font-family: "Nunito", sans-serif;
-  /* margin-top: 0px; */
-
   font-size: 15px;
   font-weight: bold;
   color: #2e3030;
@@ -155,7 +200,7 @@ h1 {
   color: #2a1542;
   padding-top: 5px;
 }
-
+/* choose player button for single play */
 .choosePlayerButton {
   border-style: outset;
   border-width: 5px;
@@ -170,6 +215,7 @@ h1 {
   border-style: inset;
 }
 
+/* Media query */
 @media only screen and (max-width: 768px) {
   .body-container {
     height: 420px;
@@ -187,4 +233,124 @@ h1 {
     width: 50%;
     height: 50%;
   }
+}
+
+/* .single-button {
+} */
+
+/*--theme 2--*/
+
+body.theme2 {
+  background: #dbd7fd;
+}
+
+.grid-container.theme2 {
+  background: #b4afe6;
+}
+
+.grid-box.theme2 {
+  border: 1px solid #5c597a;
+}
+
+.body-container.theme2 {
+  background: #e3e1fc;
+}
+
+h1.theme2 {
+  color: #5c597a;
+}
+
+.score-player1.theme2 {
+  background: #e3e1fc;
+}
+
+.grid-box:hover.theme2 {
+  background: #c3bef3;
+}
+
+.resetbutton.theme2 {
+  background: #d4cfff;
+}
+
+.resetbutton:hover.theme2 {
+  background: #c6c4ee;
+}
+
+.player-switch.theme2 {
+  background: #d4cfff;
+}
+
+.dropdown-colourtheme.theme2 {
+  background: #d4cfff;
+}
+
+.dropdown-colourtheme:hover.theme2 {
+  background: #c6c4ee;
+}
+
+.button-container:hover .dropdown-colourtheme.theme2 {
+  background: #c6c4ee;
+}
+
+/* colour theme 3*/
+/*--theme 2--*/
+
+body.theme3 {
+  background: #fcfcd7;
+}
+
+.grid-container.theme3 {
+  background: #fdfca7;
+}
+
+.grid-box.theme3 {
+  border: 1px solid #95ac6a;
+}
+
+.body-container.theme3 {
+  background: #fccb9d;
+}
+
+h1.theme3 {
+  color: #e66f5a;
+}
+
+.score-player1.theme3 {
+  background: #fccb9d;
+}
+
+.grid-box:hover.theme3 {
+  background: #eeed9d;
+}
+
+.resetbutton.theme3 {
+  background: #fdfca7;
+}
+
+.resetbutton:hover.theme3 {
+  background: #eeed9d;
+}
+
+.player-switch.theme3 {
+  background: #fdfca7;
+}
+
+.dropdown-colourtheme.theme3 {
+  background: #fdfca7;
+}
+
+.dropdown-colourtheme:hover.theme3 {
+  background: #eeed9d;
+}
+
+.button-container:hover .dropdown-colourtheme.theme3 {
+  background: #eeed9d;
+}
+/* player1 p-class for multi.html */
+.multiPlayer1 {
+  padding-top: 10px;
+}
+
+.multiPlayer2 {
+  padding-top: 10px;
 }

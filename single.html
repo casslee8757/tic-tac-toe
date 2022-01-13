@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src=js/jquery.js></script>
-    <script src=js/main.js></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/single.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Spline+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
 
-
-    <title>Tic Tac Toe</title>
+    <title>SINGLE</title>
 </head>
 <body>
     <div class="body-container">
+        <div class="button-container"> 
+            <button class = "dropdown-colourtheme">Colour Theme</button> 
+            <div class="dropdown-content">
+                <a id="theme1">Default Theme</a>
+                <a id="theme2">Theme 2</a>
+                <a id="theme3">Theme 3</a>
+
+            </div>
+        </div>
+
         <h1>Tic-Tac-Toe</h1>
     
     <div class="choose-player">
@@ -33,7 +42,7 @@
         <div class="scoreplayer2"> 
             <p class="score-player1" id="score2">0</p>
         </div> 
-
+<div class="score-play"></div>
     </div>
     <!-- <button class="button-player1">O</button>
         <button class="button-player2">X</button> -->
@@ -50,6 +59,7 @@
         <div id="8" class="grid-box"></div>
     </div>
     </div>
+
     
     <div class="button-text">
     </div>
