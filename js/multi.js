@@ -111,7 +111,7 @@ $(function(){
         $('#game-reset-button').on('click', function(){
             //update the board array with empty strings
             board = [ '', '', '', '', '', '', '', '', ''];
-            $('.grid-box').empty(); //empty grid boxes 
+            eachBoxes.empty(); //empty grid boxes 
             playerTurn = 0; //return to player 1 
             turn.html("CHOOSE PLAYER");//print choose the player on the screen
             cellBoxes = 0;

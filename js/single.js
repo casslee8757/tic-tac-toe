@@ -31,19 +31,15 @@ $(function(){
     //save jquery grid-box variable 
     const eachBoxes = $('.grid-box');
     let turn = $('#turn');
+
     
-    
-    //default player turn 
-    
-        //game start function 
-        const $gameStart = function(){
-            eachBoxes.on('click', function(){    
+    //game start function 
+    const $gameStart = function(){
+        eachBoxes.on('click', function(){    
             //call grid id from html using attr
             const gridId = $(this).attr("id");
             //change the string value to integer 
             const gridToNum = parseInt(gridId)
-            
-        
             //printing visual inputs on the grid board 
             $(this).html(player1); //"O"
             $(this).css('color', '#27005e') //color input 
@@ -63,90 +59,79 @@ $(function(){
             checkWinningStatus();
 
             playerTurn = 0; 
-            // else{
-            //     // const randomPlay = Math.round(Math.random() * 8)
-            //     // board[randomPlay] = player2 //'O'
-            //     // $(`#${randomPlay}`).html(player2);
-            //     // $('.grid-box:empty')
-            //     // console.log(board[randomPlay])
-            //     aiPlayer();
-            //     playerTurn = 0; 
-  
-            // } 
-            
-             
-            //check winning function runs here 
+         
             
         });//end of eachBoxes
-        }//end of gameStart 
+    }//end of gameStart 
 
-        //winning status function
-        const checkWinningStatus = function(){
-            //loop through the winning possibilities array 
-            for (let i = 0; i < winningPossibilities.length; i++){
-                //save the winning possibilities loop into a variable 
-                const winning = winningPossibilities[i];
-                //save winning possibilities loop into 3 different variables = 3 loops 
-                let a = winning[0]
-                let b = winning[1]  
-                let c = winning[2]
-                //place each loop variales with the board array and save them into content a b and
+    //winning status function
+    const checkWinningStatus = function(){
+        //loop through the winning possibilities array 
+        for (let i = 0; i < winningPossibilities.length; i++){
+            //save the winning possibilities loop into a variable 
+            const winning = winningPossibilities[i];
+            //save winning possibilities loop into 3 different variables = 3 loops 
+            let a = winning[0]
+            let b = winning[1]  
+            let c = winning[2]
+            //place each loop variales with the board array and save them into content a b and
 
-                //call the grid box id from html and loop them
-                let contentA = board[a];
-                let contentB = board[b];
-                let contentC = board[c];
+            //call the grid box id from html and loop them
+            let contentA = board[a];
+            let contentB = board[b];
+            let contentC = board[c];
 
-                //compare the 3 loop variables to check 
-                if (contentA === contentB && contentB === contentC && contentA !== "") {
-                    //if player wins the game turn off click event 
-                    $clickEvent = eachBoxes.off('click');  
+            //compare the 3 loop variables to check 
+            if (contentA === contentB && contentB === contentC && contentA !== "") {
+                //if player wins the game turn off click event 
+                $clickEvent = eachBoxes.off('click');  
 
-                    //check who wins the game 
-                    if (playerTurn === 1){
-                        playerScore1++;
-                        $('#score1').html(playerScore1);
-                        turn.html("PLAYER 1 WINS");
+                //check who wins the game 
+                if (playerTurn === 1){
+                    playerScore1++;
+                    $('#score1').html(playerScore1);
+                    turn.html("PLAYER 1 WINS");
                         
-                        
-                    }else{
-                        playerScore2++;                       
-                        $('#score2').html(playerScore2);
-                        turn.html("PLAYER 2 WINS");
-                        
-                    } //end of if statement 
-
-                //draw = if the board does not include [''] string then return draw    
-                }else if(!board.includes('')){
-                    turn.html("DRAW"); // print draw input on the screen   
+        
+                }else{
+                    playerScore2++;                       
+                    $('#score2').html(playerScore2);
+                    turn.html("PLAYER 2 WINS");
                     
-                } //end of if statement  
-                
+                } //end of if statement 
 
-            }// closing of for loop 
-        } // function checkwinningstatus
+            //draw = if the board does not include [''] string then return draw    
+            }else if(!board.includes('')){
+                turn.html("DRAW"); // print draw input on the screen   
+                
+            } //end of if statement  
+            
+
+        }// closing of for loop 
+    } // function checkwinningstatus
         
         //reset function
-        $('.game-reset').on('click', function(){
+        $('#game-reset-button').on('click', function(){
             //update the board array with empty strings
             board = [ '', '', '', '', '', '', '', '', ''];
             //empty grid boxes 
             $('.grid-box').empty();
-            //return to player 1 
-            playerTurn = 0;
             turn.html("CHOOSE PLAYER");//print choose the player on the screen 
             playerScore1 = 0;
             playerScore2 = 0;
             //return to gameStart
             $gameStart();
-            player1Button();
+            // player1Button();
+            console.log(playerScore1);
+
         })//end of resetbutton function
         
-        $('.score-reset').on('click', function(){
+        $('#score-reset-button').on('click', function(){
             playerScore1 = 0;
             playerScore2 = 0;
             $('#score1').html('0')
             $('#score2').html('0')
+            console.log(playerScore1);
 
         })
 
@@ -202,41 +187,55 @@ $(function(){
     // aiPlayer();
     player1Button();
 
+    const aiPlayer = function(){
+        const emptyBox = $('.grid-box:empty')
+        const emptyIndex = Math.floor(Math.random() * emptyBox.length);
+        const emptyCell = emptyBox[emptyIndex]
+        const emptyId = parseInt(emptyCell.id)
+
+        board[emptyId] = player2 //'X'
+        $(emptyCell).html(player2);
+
+    }
+
+    $("#theme2").on('click', function(){
+        $('body').addClass('theme2');
+        $('h1').removeClass('color').addClass('theme2');
+        $('.grid-container').removeClass('background').addClass('theme2');
+        $('.grid-box').removeClass('border').addClass('theme2');
+        $('.body-container').removeClass('background').addClass('theme2');
+        $('.score-player1').removeClass('background').addClass('theme2');
+        $('.grid-box:hover').removeClass('background').addClass('theme2');
+        $('.resetbutton').removeClass('background').addClass('theme2');
+        $('.resetbutton:hover').removeClass('background').addClass('theme2');
+        $('.player-switch').removeClass('background').addClass('theme2');
+        $('.dropdown-colourtheme').removeClass('background').addClass('theme2');
+        $('.dropdown-colourtheme:hover').removeClass('background').addClass('theme2');
+        $('.button-container:hover .dropdown-colourtheme').removeClass('background').addClass('theme2');
+        
+    })
     
+    $("#theme3").on('click', function(){
 
-        $("#theme2").click(function(){
-            $('body').addClass('theme2')
-            $('h1').removeClass('color').addClass('theme2')
-            $('.grid-container').removeClass('background').addClass('theme2')
-            $('.grid-box').removeClass('border')
-            $('.grid-box').addClass('theme2')
-            $('.body-container').removeClass('background')
-            $('.body-container').addClass('theme2')
-            $('.score-player1').removeClass('background');
-            $('.score-player1').addClass('theme2');
-            $('.grid-box:hover').removeClass('background');
-            $('.grid-box:hover').addClass('theme2');
+        $('body').addClass('theme3');
+        $('h1').removeClass('color').addClass('theme3');
+        $('.grid-container').removeClass('background').addClass('theme3');
+        $('.grid-box').removeClass('border').addClass('theme3');
+        $('.body-container').removeClass('background').addClass('theme3');
+        $('.score-player1').removeClass('background').addClass('theme3');
+        $('.grid-box:hover').removeClass('background').addClass('theme3');
+        $('.resetbutton').removeClass('background').addClass('theme3');
+        $('.resetbutton:hover').removeClass('background').addClass('theme3');
+        $('.player-switch').removeClass('background').addClass('theme3');
+        $('.dropdown-colourtheme').removeClass('background').addClass('theme3');
+        $('.dropdown-colourtheme:hover').removeClass('background').addClass('theme3');
+        $('.button-container:hover .dropdown-colourtheme').removeClass('background').addClass('theme3');
+        
+    })
+
+
 
         
-
-
-        })
-
-
-
-        const aiPlayer = function(){
-            console.log('aiPlayer()');
-            const emptyBox = $('.grid-box:empty')
-            const emptyIndex = Math.floor(Math.random() * emptyBox.length);
-            const emptyCell = emptyBox[emptyIndex]
-            const emptyId = parseInt(emptyCell.id)
-
-            board[emptyId] = player2 //'X'
-            $(emptyCell).html(player2);
-            console.log(board)
-
-        
-        }
 
         // console.log(aiPlayer());
 })//jquery function
