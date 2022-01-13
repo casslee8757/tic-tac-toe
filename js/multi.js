@@ -132,6 +132,7 @@ $(function(){
     $gameStart(); //start the function 
     
     //colour theme
+
     $("#theme2").on('click', function(){
         $('body').addClass('theme2');
         $('h1').removeClass('color').addClass('theme2');
@@ -146,10 +147,11 @@ $(function(){
         $('.dropdown-colourtheme').removeClass('background').addClass('theme2');
         $('.dropdown-colourtheme:hover').removeClass('background').addClass('theme2');
         $('.button-container:hover .dropdown-colourtheme').removeClass('background').addClass('theme2');
-
+        
     })
-
+    
     $("#theme3").on('click', function(){
+
         $('body').addClass('theme3');
         $('h1').removeClass('color').addClass('theme3');
         $('.grid-container').removeClass('background').addClass('theme3');
@@ -163,6 +165,7 @@ $(function(){
         $('.dropdown-colourtheme').removeClass('background').addClass('theme3');
         $('.dropdown-colourtheme:hover').removeClass('background').addClass('theme3');
         $('.button-container:hover .dropdown-colourtheme').removeClass('background').addClass('theme3');
+        
     })
-
+    
 })//jquery function
