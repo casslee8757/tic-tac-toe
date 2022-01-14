@@ -104,30 +104,30 @@ $(function(){
                 
             } //end of if statement  
                 
-            }// closing of for loop 
-        } // function checkwinningstatus
+        }// closing of for loop 
+    } // function checkwinningstatus
         
-        //reset function
-        $('#game-reset-button').on('click', function(){
-            //update the board array with empty strings
-            board = [ '', '', '', '', '', '', '', '', ''];
-            eachBoxes.empty(); //empty grid boxes 
-            playerTurn = 0; //return to player 1 
-            turn.html("CHOOSE PLAYER");//print choose the player on the screen
-            cellBoxes = 0;
-            
-            //return to gameStart
-            $gameStart();
-            player1Button(); // single player function
-        })//end of resetbutton function
+    //reset function
+    $('#game-reset-button').on('click', function(){
+        //update the board array with empty strings
+        board = [ '', '', '', '', '', '', '', '', ''];
+        eachBoxes.empty(); //empty grid boxes 
+        playerTurn = 0; //return to player 1 
+        turn.html("CHOOSE PLAYER");//print choose the player on the screen
+        cellBoxes = 0;
         
-        $('#score-reset-button').on('click', function(){
-            playerScore1 = 0;
-            playerScore2 = 0;
-            $('#score1').html('0')
-            $('#score2').html('0')
+        //return to gameStart
+        $gameStart();
 
-        })
+    })//end of resetbutton function
+    
+    $('#score-reset-button').on('click', function(){
+        playerScore1 = 0;
+        playerScore2 = 0;
+        $('#score1').html('0')
+        $('#score2').html('0')
+
+    })
 
     $gameStart(); //start the function 
     

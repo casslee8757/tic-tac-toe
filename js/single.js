@@ -174,7 +174,7 @@ $(function(){
             board[emptyId] = player2 //'X'
             $(emptyCell).html(player2);
         }else{
-            board[emptyId] = player1 //'X'
+            board[emptyId] = player1 //'O'
             $(emptyCell).html(player1);
         }
 
