@@ -1,11 +1,11 @@
 //dafualt game status 
-let gameActive = true;
 let player1 = "O"
 let player2 = "X"
 let playerScore1 = 0;
 let playerScore2 = 0;
 let playerTurn = 0;
 let cellBoxes = 0;
+let clickButton = false; 
 
 //all winning posibilities 
 const winningPossibilities = [
@@ -32,51 +32,52 @@ $(function(){
     const eachBoxes = $('.grid-box');
     let turn = $('#turn');
 
+
+    const cssFunction = function(){
+        eachBoxes.css('color', '#27005e');
+        turn.hide()
+        turn.fadeIn(400)
+    }
+
+
+
     //game start function 
     const $gameStart = function(){
         eachBoxes.one('click', function(){    
-            //call grid id from html using attr
             const gridId = $(this).attr("id");
-            //change the string value to integer 
             const gridToNum = parseInt(gridId)
-            //printing visual inputs on the grid board 
-            if(playerTurn === 0){
+            
+            if(clickButton === true){
+                
                 $(this).html(player1); //"O"
                 $(this).css('color', '#27005e') //color input 
-                //fade in and out effect for player1 
                 turn.hide()
                 turn.fadeIn(400)
-                //player1 input when switch turns 
                 turn.html("TURN : PLAYER 1")
-                //update player1 value('O') to the board 
                 board[gridToNum] = player1;
                 checkWinningStatus();
                 playerTurn = 1;
-                cellBoxes++; // score value gets added each win
+                cellBoxes++; 
                 aiPlayer();
                 checkWinningStatus();
-
                 playerTurn = 0; 
-                   
+                cellBoxes++;
 
             }else{
-                $(this).html(player2); //"O"
+                $(this).html(player2); //"X"
                 $(this).css('color', '#27005e') //color input 
-                //fade in and out effect for player1 
                 turn.hide()
                 turn.fadeIn(400)
-                //player1 input when switch turns 
                 turn.html("TURN : PLAYER 2")
-                //update player1 value('O') to the board 
                 board[gridToNum] = player2;
                 checkWinningStatus();
-                playerTurn = 0;
-                cellBoxes++; // score value gets added each win
+                playerTurn = 0; 
+                cellBoxes++;
                 aiPlayer();
                 checkWinningStatus();
-
                 playerTurn = 1; 
-                 
+                cellBoxes++;
+                
             }                    
         });//end of eachBoxes
     }//end of gameStart 
@@ -102,19 +103,29 @@ $(function(){
                 //check who wins the game 
                 if (playerTurn === 1){
                     playerScore1++;
+                    playerScore2 = 0;
+                    console.log(playerScore1);
+                    console.log(playerScore2);
                     $('#score1').html(playerScore1);
                     turn.html("PLAYER 1 WINS");
                         
-                }else{
-                    playerScore2++;                       
-                    $('#score2').html(playerScore1);
-                    turn.html("PLAYER 2 WINS");
+                }
+                
+                // if (playerTurn === 0){
+                //     playerScore2++; 
+                //     console.log(playerScore2);   
+                //     console.log('------------');                   
+                //     $('#score2').html(playerScore2);
+                //     turn.html("PLAYER 2 WINS");
                     
-                } //end of if statement 
+                // } //end of if statement 
 
             //draw = if the board does not include [''] string then return draw    
-            }else if(cellBoxes === 9){
+            }else if(cellBoxes === 8){
                 turn.html("DRAW"); // print draw input on the screen   
+                cellBoxes = 0;
+                // console.log(cellBoxes);
+
                 
             } //end of if statement  
             
@@ -126,12 +137,15 @@ $(function(){
             //update the board array with empty strings
             board = [ '', '', '', '', '', '', '', '', ''];
             //empty grid boxes 
-            $('.grid-box').empty();
+            $('.grid-box').html('')
             turn.html("CHOOSE PLAYER");//print choose the player on the screen 
-            // playerScore1 = 0;
-            // playerScore2 = 0;
+            playerScore1 = 0;
+            playerScore2 = 0;
+            cellBoxes = 0;
+            
+            $clickEvent = eachBoxes.off('click');  
             $gameStart();
-            console.log(playerScore1);
+            // console.log(playerScore1);
 
         })//end of resetbutton function
         
@@ -144,25 +158,29 @@ $(function(){
 
         })
 
+        
         $('#player1').one('click', function(){
+            clickButton = true; 
             turn.hide()
             turn.fadeIn(400)
             turn.html("PLAYER 1") 
             playerTurn = 0; 
             console.log('clicked');
             $gameStart();
-
         })
         
+        
         $('#player2').one('click', function(){
+            clickButton = false;
             turn.hide()
             turn.fadeIn(400)
             turn.html("PLAYER 2")
             playerTurn = 1;
             $gameStart();
             
-        })//end of player2 button 
+            })//end of player2 button 
     
+
     const aiPlayer = function(){
         const emptyBox = $('.grid-box:empty')
         const emptyIndex = Math.floor(Math.random() * emptyBox.length);
@@ -170,7 +188,7 @@ $(function(){
         const gridBoxId = $('.grid-box').attr('id')
         const emptyId = parseInt(emptyCell.gridBoxId)
 
-        if (playerTurn === 1){
+        if (clickButton === true){
             board[emptyId] = player2 //'X'
             $(emptyCell).html(player2);
         }else{

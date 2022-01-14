@@ -14,7 +14,21 @@ h1 {
 .multi-colour {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
+
+.modeChange {
+  margin-right: 5px;
+  margin-top: 0;
+  font-family: "Spline Sans", sans-serif;
+  color: #ccb5cc;
+  font-size: 10px;
+  font-style: italic;
+  cursor: pointer;
+  text-decoration: none;
+  text-shadow: -0.5px 0px #807480;
+}
+
 /* Dropdown button*/
 .dropdown-colourtheme {
   border-radius: 5px;

@@ -115,7 +115,6 @@ $(function(){
         playerTurn = 0; //return to player 1 
         turn.html("CHOOSE PLAYER");//print choose the player on the screen
         cellBoxes = 0;
-        
         //return to gameStart
         $gameStart();
 
