@@ -1,6 +1,7 @@
 /*--theme1--*/
 body {
   background-color: #f3e5f5;
+  margin-right: 0;
 }
 
 h1 {
@@ -11,6 +12,31 @@ h1 {
   padding: 0;
 }
 
+.overlab {
+  position: relative;
+  background-color: #b49fb8;
+  float: right;
+  width: 10px;
+  height: 30%;
+  padding: 0px 0px 0px 0px;
+  border-top-left-radius: 110px;
+  border-bottom-left-radius: 110px;
+  transform: translate(0, 70%);
+}
+
+img {
+  width: 50px;
+}
+
+.overlab:hover {
+  width: 50px;
+  height: 100%;
+  padding: 30px 5px 30px 10px;
+  transform: translate(0, 50%);
+  cursor: pointer;
+}
+
+/* --multi-single switch-- */
 .multi-colour {
   display: flex;
   flex-direction: row;

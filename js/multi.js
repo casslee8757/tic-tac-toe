@@ -1,5 +1,4 @@
 //dafault game status 
-let gameActive = true;
 let player1 = "O"
 let player2 = "X"
 let playerScore1 = 0;
@@ -128,10 +127,13 @@ $(function(){
 
     })
 
+    
+
+
+
     $gameStart(); //start the function 
     
     //colour theme
-
     $("#theme2").on('click', function(){
         $('body').removeClass('theme3').addClass('theme2');
         $('h1').removeClass('theme3','color').addClass('theme2');

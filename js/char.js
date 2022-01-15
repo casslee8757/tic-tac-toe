@@ -1,11 +1,11 @@
 //dafualt game status 
-let currentPlayer = "O"
-
+let player1 = "O"
+let player2 = "X"
 let playerScore1 = 0;
 let playerScore2 = 0;
-let playerTurn = 0; //switches the turn on each click 
+let playerTurn = 0;
 let cellBoxes = 0;
-let playerChoice = "O" // keep tracks of single player the choice of symble for the player of human player 
+let clickButton = false; 
 
 //all winning posibilities 
 const winningPossibilities = [
@@ -33,65 +33,52 @@ $(function(){
     let turn = $('#turn');
 
     const cssFunction = function(){
-        // eachBoxes.css('color', '#27005e');
+        eachBoxes.css('color', '#27005e');
         turn.hide()
         turn.fadeIn(400)
     }
 
     //game start function 
-    const $switchPlayerTurn = function(){
-        
-        if(playerChoice === "O"){
-            cssFunction();
-            turn.html("TURN : PLAYER 1")
-            humanAiTurn();
-
-        }else{
-            cssFunction();
-            turn.html("TURN : PLAYER 2")
-            humanAiTurn();
-            
-        }  // end of click if statement                
-    }//end of gameStart 
-
-    const humanAiTurn = function(){
-        eachBoxes.one('click', function(){   
+    const $gameStart = function(){
+        eachBoxes.one('click', function(){    
             const gridId = $(this).attr("id");
             const gridToNum = parseInt(gridId)
-            board[gridToNum] = "O";//update player1 value('O') to the board 
-            $(this).html("O"); //"X"
-            $(this).css('color', '#4e176c') //color input
-            playerTurn=0;
-            console.log(playerTurn);
-            checkWinningStatus();
-            cellBoxes++; 
-            aiPlayer();
-            console.log(playerTurn);
+            
+            if(clickButton === true){
+                
+                $(this).html(player1); //"O"
+                $(this).css('color', '#27005e') //color input 
+                turn.hide()
+                turn.fadeIn(400)
+                turn.html("TURN : PLAYER 1")
+                board[gridToNum] = player1;
+                checkWinningStatus();
+                playerTurn = 1;
+                cellBoxes++; 
+                aiPlayer();
+                checkWinningStatus();
+                playerTurn = 0; 
+                cellBoxes++;
 
+            }else{
+                $(this).html(player2); //"X"
+                $(this).css('color', '#27005e') //color input 
+                turn.hide()
+                turn.fadeIn(400)
+                turn.html("TURN : PLAYER 2")
+                board[gridToNum] = player2;
+                checkWinningStatus();
+                playerTurn = 0; 
+                cellBoxes++;
+                aiPlayer();
+                checkWinningStatus();
+                playerTurn = 1; 
+                cellBoxes++;
+                
+            }                    
+        });//end of eachBoxes
+    }//end of gameStart 
 
-        });//end of eachboxes
-        
-    }//end of humanAiTurn
-
-    const aiPlayer = function(){
-        const emptyBox = $('.grid-box:empty')
-        const emptyIndex = Math.floor(Math.random() * emptyBox.length);
-        const emptyCell = emptyBox[emptyIndex]
-        const gridBoxId = eachBoxes.attr('id')
-        const emptyId = parseInt(emptyCell.gridBoxId)
-
-        board[emptyId] = "X" 
-        $(emptyCell).html("X");
-        $(emptyCell).css('color','#8f4ab8');
-        playerTurn=1;
-        console.log(playerTurn);
-
-        checkWinningStatus();
-        console.log(playerTurn);
-
-        cellBoxes++
-        
-    }//aiPlayer
     //winning status function
     const checkWinningStatus = function(){
         //loop through the winning possibilities array 
@@ -113,17 +100,22 @@ $(function(){
                 //check who wins the game 
                 if (playerTurn === 1){
                     playerScore1++;
-                    // console.log(playerScore1);
+                    playerScore2 = 0;
+                    console.log(playerScore1);
+                    console.log(playerScore2);
                     $('#score1').html(playerScore1);
                     turn.html("PLAYER 1 WINS");
                         
-                }else{
-                    playerScore2++; 
-                    // console.log(playerScore2);
-                    $('#score2').html(playerScore2);
-                    turn.html("PLAYER 2 WINS");
+                }
+                
+                // if (playerTurn === 0){
+                //     playerScore2++; 
+                //     console.log(playerScore2);   
+                //     console.log('------------');                   
+                //     $('#score2').html(playerScore2);
+                //     turn.html("PLAYER 2 WINS");
                     
-                } //end of if statement 
+                // } //end of if statement 
 
             //draw = if the board does not include [''] string then return draw    
             }else if(cellBoxes === 8){
@@ -131,57 +123,83 @@ $(function(){
                 cellBoxes = 0;
                 // console.log(cellBoxes);
 
+                
             } //end of if statement  
             
         }// closing of for loop 
     } // function checkwinningstatus
         
         //reset function
-    $('#game-reset-button').on('click', function(){
+        $('#game-reset-button').on('click', function(){
             //update the board array with empty strings
             board = [ '', '', '', '', '', '', '', '', ''];
             //empty grid boxes 
             $('.grid-box').html('')
             turn.html("CHOOSE PLAYER");//print choose the player on the screen 
-            // playerScore1 = 0;
-            // playerScore2 = 0;
+            playerScore1 = 0;
+            playerScore2 = 0;
             cellBoxes = 0;
-            playerTurn = 0;
             
             $clickEvent = eachBoxes.off('click');  
-            humanAiTurn()
+            $gameStart();
+            // console.log(playerScore1);
 
         })//end of resetbutton function
         
-    $('#score-reset-button').on('click', function(){
+        $('#score-reset-button').on('click', function(){
             playerScore1 = 0;
             playerScore2 = 0;
             $('#score1').html('0')
             $('#score2').html('0')
+            console.log(playerScore1);
 
         })
 
         
-    $('#player1').one('click', function(){
-        playerChoice ="O"
-        cssFunction();
-        turn.html("PLAYER 1") 
-
-        $switchPlayerTurn();
-    })
+        $('#player1').one('click', function(){
+            clickButton = true; 
+            turn.hide()
+            turn.fadeIn(400)
+            turn.html("PLAYER 1") 
+            playerTurn = 0; 
+            console.log('clicked');
+            $gameStart();
+        })
         
         
-    $('#player2').one('click', function(){
-        playerChoice ="X"
-        cssFunction();
-        turn.html("PLAYER 2")
-
-        $switchPlayerTurn();
-        
-    })//end of player2 button 
+        $('#player2').one('click', function(){
+            clickButton = false;
+            turn.hide()
+            turn.fadeIn(400)
+            turn.html("PLAYER 2")
+            playerTurn = 1;
+            $gameStart();
+            
+            })//end of player2 button 
     
+        const charChange = function(icon){
+            const characters = $('img')
+            for(let i = 0; i < characters.length; i++){
+                const veggies = characters[i];
+                const 
+            }
+        }
+    const aiPlayer = function(){
+        const emptyBox = $('.grid-box:empty')
+        const emptyIndex = Math.floor(Math.random() * emptyBox.length);
+        const emptyCell = emptyBox[emptyIndex]
+        const gridBoxId = $('.grid-box').attr('id')
+        const emptyId = parseInt(emptyCell.gridBoxId)
 
-   
+        if (clickButton === true){
+            board[emptyId] = player2 //'X'
+            $(emptyCell).html(player2);
+        }else{
+            board[emptyId] = player1 //'O'
+            $(emptyCell).html(player1);
+        }
+
+    }//aiPlayer
 
     $("#theme2").on('click', function(){
         $('body').addClass('theme2');
