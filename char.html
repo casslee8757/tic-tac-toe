@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/jquery.js"></script>
-    <script src="js/single.js"></script>
+    <script src="js/char.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Spline+Sans&display=swap" rel="stylesheet">
@@ -17,12 +17,12 @@
 </head>
 <body>
     <div class="overlab">
-        <img src="img/1.png" id="veg1">
-        <img src="img/2.png" id="veg2">
-        <img src="img/3.png" id="veg3">
-        <img src="img/4.png" id="veg4">
-        <img src="img/5.png" id="veg5">
-        <img src="img/6.png" id="veg6">
+        <img src="img/1.png" id="veg1" class="selection">
+        <img src="img/2.png" id="veg2" class="selection">
+        <img src="img/3.png" id="veg3" class="selection">
+        <img src="img/4.png" id="veg4" class="selection">
+        <img src="img/5.png" id="veg5" class="selection">
+        <img src="img/6.png" id="veg6" class="selection">
     </div>
     <div class="body-container">
         <div class="multi-colour">
@@ -40,16 +40,16 @@
         <h1>Tic-Tac-Toe</h1>
     
     <div class="choose-player">
-        <button id="player1" class="choosePlayerButton">Player 1</button>
+        <p id="player1" class="multiPlayer1">Player 1</p>
         <div class='scoreplayer1'>
             <p class="score-player1" id="score1">0</p>
         </div>
         
         <div class="player-switch">
-            <span id="turn" >CHOOSE PLAYER</span>
+            <span id="turn" >CHOOSE ICONS</span>
             
         </div>
-        <button id="player2" class="choosePlayerButton">Player 2</button>
+        <P id="player2" class="multiPlayer2">Player 2</p>
         <div class="scoreplayer2"> 
             <p class="score-player1" id="score2">0</p>
         </div> 

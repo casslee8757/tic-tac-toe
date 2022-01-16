@@ -1,11 +1,13 @@
-//dafualt game status 
-let player1 = "O"
-let player2 = "X"
+//dafault game status 
 let playerScore1 = 0;
 let playerScore2 = 0;
 let playerTurn = 0;
 let cellBoxes = 0;
-let clickButton = false; 
+let oPlayerIcon = "";
+let xPlayerIcon = "";
+
+
+
 
 //all winning posibilities 
 const winningPossibilities = [
@@ -27,59 +29,76 @@ let board = [ '', '', '', '', '', '', '', '', ''];
 
 //Jquery function starts 
 $(function(){
-
-    //save jquery grid-box variable 
+    //save jquery into variables
     const eachBoxes = $('.grid-box');
     let turn = $('#turn');
+    let playerTurn = 0; //default player turn 
+    
+    $(".selection").on("click",function(){
+        // $(this).attr('src')
+        const icons = $(this)
+        for(let i = 0; i < icons.length; i++){
+            const iconss = icons[i]
 
-    const cssFunction = function(){
-        eachBoxes.css('color', '#27005e');
-        turn.hide()
-        turn.fadeIn(400)
-    }
+            if (playerTurn === 0){
+                // oplayerIcon = icons
+                oPlayerIcon = iconss;
+                console.log(oPlayerIcon);
+                $(this).css('opacity', 0.5)
+                playerTurn = 1
+            }else{
+                xPlayerIcon = iconss;
+                console.log(xPlayerIcon);
+                $(this).css('opacity', 0.5)
+                playerTurn = 0
+                $(".selection").off("click");
+        }//end of if    
+        }
+        $gameStart();
+    });//$playerSelection
+   
 
-    //game start function 
+
     const $gameStart = function(){
-        eachBoxes.one('click', function(){    
-            const gridId = $(this).attr("id");
-            const gridToNum = parseInt(gridId)
-            
-            if(clickButton === true){
+        eachBoxes.one('click', function(){
+        const gridId = $(this).attr("id"); //call grid id from html using attr        
+        const gridToNum = parseInt(gridId) //change the string value to integer 
+        
+            if(playerTurn === 0){
+                console.log(`${oPlayerIcon}`);
+
+                $(this).append("`${oPlayerIcon}`");
                 
-                $(this).html(player1); //"O"
-                $(this).css('color', '#27005e') //color input 
+                // $(this).attr( 'src', `${oPlayerIcon}`);
+                //fade in and out effect for player1 
                 turn.hide()
                 turn.fadeIn(400)
-                turn.html("TURN : PLAYER 1")
-                board[gridToNum] = player1;
-                checkWinningStatus();
-                playerTurn = 1;
-                cellBoxes++; 
-                aiPlayer();
-                checkWinningStatus();
-                playerTurn = 0; 
-                cellBoxes++;
+                turn.html("TURN : PLAYER 1") //player1 input when switch turns
+                board[gridToNum] = "O";//update player1 value('O') to the board 
+                cellBoxes++ // increment for each turn (need for future draw)
+                playerTurn = 1; //switch player1 to player2
+
 
             }else{
-                $(this).html(player2); //"X"
-                $(this).css('color', '#27005e') //color input 
+                $(this).html("<img src=`${xPlayerIcon}`>");
+                
+                // $(this).css('color', '#8f4ab8') // color input 
+                //fade in and out effect for player2
                 turn.hide()
                 turn.fadeIn(400)
-                turn.html("TURN : PLAYER 2")
-                board[gridToNum] = player2;
-                checkWinningStatus();
-                playerTurn = 0; 
-                cellBoxes++;
-                aiPlayer();
-                checkWinningStatus();
-                playerTurn = 1; 
-                cellBoxes++;
+                turn.html("TURN : PLAYER 2") //player2 input when switch turns 
+                board[gridToNum] = "X"; //update player2 value('X') to the board 
+                cellBoxes++
+                playerTurn = 0; //switch player1 to player2 
                 
-            }                    
+
+            } //end of if else   
+
+        checkWinningStatus(); //check winning function runs here
+
         });//end of eachBoxes
     }//end of gameStart 
 
-    //winning status function
     const checkWinningStatus = function(){
         //loop through the winning possibilities array 
         for (let i = 0; i < winningPossibilities.length; i++){
@@ -99,142 +118,86 @@ $(function(){
                 $clickEvent = eachBoxes.off('click');  
                 //check who wins the game 
                 if (playerTurn === 1){
-                    playerScore1++;
-                    playerScore2 = 0;
-                    console.log(playerScore1);
-                    console.log(playerScore2);
-                    $('#score1').html(playerScore1);
-                    turn.html("PLAYER 1 WINS");
-                        
-                }
-                
-                // if (playerTurn === 0){
-                //     playerScore2++; 
-                //     console.log(playerScore2);   
-                //     console.log('------------');                   
-                //     $('#score2').html(playerScore2);
-                //     turn.html("PLAYER 2 WINS");
+                    playerScore1++; // score value gets added each win 
+                    $('#score1').html(playerScore1); //update to the score on the screen 
+                    turn.html("PLAYER 1 WINS"); // update player 1 wins text on the screen 
+    
+                }else{
+                    playerScore2++;                       
+                    $('#score2').html(playerScore2);
+                    turn.html("PLAYER 2 WINS");
                     
-                // } //end of if statement 
+                } //end of if statement 
 
-            //draw = if the board does not include [''] string then return draw    
-            }else if(cellBoxes === 8){
+            //draw = if the cell boxes reaches 9 return draw  
+            }else if(cellBoxes === 9){
                 turn.html("DRAW"); // print draw input on the screen   
-                cellBoxes = 0;
-                // console.log(cellBoxes);
-
                 
             } //end of if statement  
-            
+                
         }// closing of for loop 
     } // function checkwinningstatus
         
-        //reset function
-        $('#game-reset-button').on('click', function(){
-            //update the board array with empty strings
-            board = [ '', '', '', '', '', '', '', '', ''];
-            //empty grid boxes 
-            $('.grid-box').html('')
-            turn.html("CHOOSE PLAYER");//print choose the player on the screen 
-            playerScore1 = 0;
-            playerScore2 = 0;
-            cellBoxes = 0;
-            
-            $clickEvent = eachBoxes.off('click');  
-            $gameStart();
-            // console.log(playerScore1);
+    //reset function
+    $('#game-reset-button').on('click', function(){
+        //update the board array with empty strings
+        board = [ '', '', '', '', '', '', '', '', ''];
+        eachBoxes.empty(); //empty grid boxes 
+        playerTurn = 0; //return to player 1 
+        turn.html("CHOOSE PLAYER");//print choose the player on the screen
+        cellBoxes = 0;
+        //return to gameStart
+        $gameStart();
 
-        })//end of resetbutton function
-        
-        $('#score-reset-button').on('click', function(){
-            playerScore1 = 0;
-            playerScore2 = 0;
-            $('#score1').html('0')
-            $('#score2').html('0')
-            console.log(playerScore1);
-
-        })
-
-        
-        $('#player1').one('click', function(){
-            clickButton = true; 
-            turn.hide()
-            turn.fadeIn(400)
-            turn.html("PLAYER 1") 
-            playerTurn = 0; 
-            console.log('clicked');
-            $gameStart();
-        })
-        
-        
-        $('#player2').one('click', function(){
-            clickButton = false;
-            turn.hide()
-            turn.fadeIn(400)
-            turn.html("PLAYER 2")
-            playerTurn = 1;
-            $gameStart();
-            
-            })//end of player2 button 
+    })//end of resetbutton function
     
-        const charChange = function(icon){
-            const characters = $('img')
-            for(let i = 0; i < characters.length; i++){
-                const veggies = characters[i];
-                const 
-            }
-        }
-    const aiPlayer = function(){
-        const emptyBox = $('.grid-box:empty')
-        const emptyIndex = Math.floor(Math.random() * emptyBox.length);
-        const emptyCell = emptyBox[emptyIndex]
-        const gridBoxId = $('.grid-box').attr('id')
-        const emptyId = parseInt(emptyCell.gridBoxId)
+    $('#score-reset-button').on('click', function(){
+        playerScore1 = 0;
+        playerScore2 = 0;
+        $('#score1').html('0')
+        $('#score2').html('0')
 
-        if (clickButton === true){
-            board[emptyId] = player2 //'X'
-            $(emptyCell).html(player2);
-        }else{
-            board[emptyId] = player1 //'O'
-            $(emptyCell).html(player1);
-        }
+    })
 
-    }//aiPlayer
+    
+     //start the function 
 
+
+    
+    //colour theme
     $("#theme2").on('click', function(){
-        $('body').addClass('theme2');
-        $('h1').removeClass('color').addClass('theme2');
-        $('.grid-container').removeClass('background').addClass('theme2');
-        $('.grid-box').removeClass('border').addClass('theme2');
-        $('.body-container').removeClass('background').addClass('theme2');
-        $('.score-player1').removeClass('background').addClass('theme2');
-        $('.grid-box:hover').removeClass('background').addClass('theme2');
-        $('.resetbutton').removeClass('background').addClass('theme2');
-        $('.resetbutton:hover').removeClass('background').addClass('theme2');
-        $('.player-switch').removeClass('background').addClass('theme2');
-        $('.dropdown-colourtheme').removeClass('background').addClass('theme2');
-        $('.dropdown-colourtheme:hover').removeClass('background').addClass('theme2');
-        $('.button-container:hover .dropdown-colourtheme').removeClass('background').addClass('theme2');
+        $('body').removeClass('theme3').addClass('theme2');
+        $('h1').removeClass('theme3','color').addClass('theme2');
+        $('.grid-container').removeClass('theme3','background').addClass('theme2');
+        $('.grid-box').removeClass('theme3','border').addClass('theme2');
+        $('.body-container').removeClass('theme3','background').addClass('theme2');
+        $('.score-player1').removeClass('theme3','background').addClass('theme2');
+        $('.grid-box:hover').removeClass('theme3','background').addClass('theme2');
+        $('.resetbutton').removeClass('theme3','background').addClass('theme2');
+        $('.resetbutton:hover').removeClass('theme3','background').addClass('theme2');
+        $('.player-switch').removeClass('theme3','background').addClass('theme2');
+        $('.dropdown-colourtheme').removeClass('theme3','background').addClass('theme2');
+        $('.dropdown-colourtheme:hover').removeClass('theme3','background').addClass('theme2');
+        $('.button-container:hover .dropdown-colourtheme').removeClass('theme3','background').addClass('theme2');
         
     })
     
     $("#theme3").on('click', function(){
 
-        $('body').addClass('theme3');
-        $('h1').removeClass('color').addClass('theme3');
-        $('.grid-container').removeClass('background').addClass('theme3');
-        $('.grid-box').removeClass('border').addClass('theme3');
-        $('.body-container').removeClass('background').addClass('theme3');
-        $('.score-player1').removeClass('background').addClass('theme3');
-        $('.grid-box:hover').removeClass('background').addClass('theme3');
-        $('.resetbutton').removeClass('background').addClass('theme3');
-        $('.resetbutton:hover').removeClass('background').addClass('theme3');
-        $('.player-switch').removeClass('background').addClass('theme3');
-        $('.dropdown-colourtheme').removeClass('background').addClass('theme3');
-        $('.dropdown-colourtheme:hover').removeClass('background').addClass('theme3');
-        $('.button-container:hover .dropdown-colourtheme').removeClass('background').addClass('theme3');
+        $('body').removeClass('theme2').addClass('theme3');
+        $('h1').removeClass('theme2','color').addClass('theme3');
+        $('.grid-container').removeClass('theme2','background').addClass('theme3');
+        $('.grid-box').removeClass('theme2','border').addClass('theme3');
+        $('.body-container').removeClass('theme2','background').addClass('theme3');
+        $('.score-player1').removeClass('theme2','background').addClass('theme3');
+        $('.grid-box:hover').removeClass('theme2','background').addClass('theme3');
+        $('.resetbutton').removeClass('theme2','background').addClass('theme3');
+        $('.resetbutton:hover').removeClass('theme2','background').addClass('theme3');
+        $('.player-switch').removeClass('theme2','background').addClass('theme3');
+        $('.dropdown-colourtheme').removeClass('theme2','background').addClass('theme3');
+        $('.dropdown-colourtheme:hover').removeClass('theme2','background').addClass('theme3');
+        $('.button-container:hover .dropdown-colourtheme').removeClass('theme2','background').addClass('theme3');
         
-    })    
-
+    })
+    
 })//jquery function
-

@@ -58,16 +58,20 @@ $(function(){
         eachBoxes.one('click', function(){   
             const gridId = $(this).attr("id");
             const gridToNum = parseInt(gridId)
-            board[gridToNum] = "O";//update player1 value('O') to the board 
-            $(this).html("O"); //"X"
-            $(this).css('color', '#4e176c') //color input
+            if (playerChoice === "O"){
+                board[gridToNum] = "O";
+                $(this).html("O"); 
+
+            }else{
+                board[gridToNum] = "X";
+                 $(this).html("X"); 
+
+            }
+            $(this).css('color', '#4e176c') 
             playerTurn=0;
-            console.log(playerTurn);
             checkWinningStatus();
             cellBoxes++; 
             aiPlayer();
-            console.log(playerTurn);
-
 
         });//end of eachboxes
         
@@ -79,15 +83,17 @@ $(function(){
         const emptyCell = emptyBox[emptyIndex]
         const gridBoxId = eachBoxes.attr('id')
         const emptyId = parseInt(emptyCell.gridBoxId)
-
-        board[emptyId] = "X" 
-        $(emptyCell).html("X");
+        if (playerChoice === "O"){
+            board[emptyId] = "X" 
+            $(emptyCell).html("X");
+        }else{
+            board[emptyId] = "O" 
+            $(emptyCell).html("O");
+        }
         $(emptyCell).css('color','#8f4ab8');
         playerTurn=1;
-        console.log(playerTurn);
 
-        checkWinningStatus();
-        console.log(playerTurn);
+        // checkWinningStatus();
 
         cellBoxes++
         
@@ -111,17 +117,19 @@ $(function(){
                 //if player wins the game turn off click event 
                 $clickEvent = eachBoxes.off('click');  
                 //check who wins the game 
-                if (playerTurn === 1){
+                if (playerTurn === 0){
                     playerScore1++;
                     // console.log(playerScore1);
                     $('#score1').html(playerScore1);
                     turn.html("PLAYER 1 WINS");
+                    return true;
                         
                 }else{
                     playerScore2++; 
                     // console.log(playerScore2);
                     $('#score2').html(playerScore2);
                     turn.html("PLAYER 2 WINS");
+                    return true;
                     
                 } //end of if statement 
 

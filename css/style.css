@@ -26,6 +26,7 @@ h1 {
 
 img {
   width: 50px;
+  transition: all 0.2s ease-in-out;
 }
 
 .overlab:hover {
@@ -34,6 +35,10 @@ img {
   padding: 30px 5px 30px 10px;
   transform: translate(0, 50%);
   cursor: pointer;
+}
+
+img:hover {
+  transform: scale(1.1);
 }
 
 /* --multi-single switch-- */
