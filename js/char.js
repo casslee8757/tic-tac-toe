@@ -5,6 +5,7 @@ let playerTurn = 0;
 let cellBoxes = 0;
 let oPlayerIcon = "";
 let xPlayerIcon = "";
+let characterTurn = 0;
 
 
 
@@ -32,42 +33,46 @@ $(function(){
     //save jquery into variables
     const eachBoxes = $('.grid-box');
     let turn = $('#turn');
-    let playerTurn = 0; //default player turn 
     
-    $(".selection").on("click",function(){
-        // $(this).attr('src')
-        const icons = $(this)
-        for(let i = 0; i < icons.length; i++){
-            const iconss = icons[i]
+    const $gameSelection = function(){
+        $(".selection").on("click",function(){
+        const icons = $(this).attr('src')
+        // const icons = $(this)
+        // for(let i = 0; i < icons.length; i++){
+            // const  = icons[i]
 
-            if (playerTurn === 0){
-                // oplayerIcon = icons
-                oPlayerIcon = iconss;
-                console.log(oPlayerIcon);
-                $(this).css('opacity', 0.5)
-                playerTurn = 1
-            }else{
-                xPlayerIcon = iconss;
-                console.log(xPlayerIcon);
-                $(this).css('opacity', 0.5)
-                playerTurn = 0
-                $(".selection").off("click");
+        if (characterTurn === 0){
+            oPlayerIcon = icons
+            // oPlayerIcon = iconss;
+            // console.log(oPlayerIcon);
+            $(this).css('opacity', 0.5)
+            // console.log(playerTurn);
+            characterTurn = 1;
+        }else{
+            xPlayerIcon = icons
+            // console.log(xPlayerIcon);
+            $(this).css('opacity', 0.5)
+            // console.log(playerTurn);
+
+            $(".selection").off("click");
+
         }//end of if    
-        }
-        $gameStart();
+        
     });//$playerSelection
-   
-
+}
 
     const $gameStart = function(){
         eachBoxes.one('click', function(){
         const gridId = $(this).attr("id"); //call grid id from html using attr        
         const gridToNum = parseInt(gridId) //change the string value to integer 
+        // playerTurn = 0;
+        console.log(playerTurn);
+
         
             if(playerTurn === 0){
-                console.log(`${oPlayerIcon}`);
-
-                $(this).append("`${oPlayerIcon}`");
+                // oPlayerIcon = (`{icons}`)
+                // console.log(oPlayerIcon);
+                $(this).html("<img src =`${oPlayerIcon}`>");
                 
                 // $(this).attr( 'src', `${oPlayerIcon}`);
                 //fade in and out effect for player1 
@@ -77,10 +82,12 @@ $(function(){
                 board[gridToNum] = "O";//update player1 value('O') to the board 
                 cellBoxes++ // increment for each turn (need for future draw)
                 playerTurn = 1; //switch player1 to player2
+                // console.log(playerTurn);
 
 
             }else{
-                $(this).html("<img src=`${xPlayerIcon}`>");
+                $(this).html("<img src =`${oPlayerIcon}`>");
+                // xPlayerIcon = `{icons}`
                 
                 // $(this).css('color', '#8f4ab8') // color input 
                 //fade in and out effect for player2
@@ -90,6 +97,8 @@ $(function(){
                 board[gridToNum] = "X"; //update player2 value('X') to the board 
                 cellBoxes++
                 playerTurn = 0; //switch player1 to player2 
+                // console.log(playerTurn);
+
                 
 
             } //end of if else   
@@ -98,7 +107,9 @@ $(function(){
 
         });//end of eachBoxes
     }//end of gameStart 
-
+    
+    $gameSelection();
+    $gameStart();
     const checkWinningStatus = function(){
         //loop through the winning possibilities array 
         for (let i = 0; i < winningPossibilities.length; i++){

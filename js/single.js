@@ -6,6 +6,7 @@ let playerScore2 = 0;
 let playerTurn = 0; //switches the turn on each click 
 let cellBoxes = 0;
 let playerChoice = "O" // keep tracks of single player the choice of symble for the player of human player 
+let gameWinner = false; 
 
 //all winning posibilities 
 const winningPossibilities = [
@@ -33,12 +34,10 @@ $(function(){
     let turn = $('#turn');
 
     const cssFunction = function(){
-        // eachBoxes.css('color', '#27005e');
         turn.hide()
         turn.fadeIn(400)
     }
 
-    //game start function 
     const $switchPlayerTurn = function(){
         
         if(playerChoice === "O"){
@@ -58,24 +57,36 @@ $(function(){
         eachBoxes.one('click', function(){   
             const gridId = $(this).attr("id");
             const gridToNum = parseInt(gridId)
+
             if (playerChoice === "O"){
                 board[gridToNum] = "O";
                 $(this).html("O"); 
 
             }else{
                 board[gridToNum] = "X";
-                 $(this).html("X"); 
-
+                $(this).html("X"); 
             }
+
             $(this).css('color', '#4e176c') 
             playerTurn=0;
-            checkWinningStatus();
             cellBoxes++; 
+            checkWinningStatus();   
             aiPlayer();
+           
 
         });//end of eachboxes
         
     }//end of humanAiTurn
+
+    // const checkWinner = function(checkWinningStatus){
+    //     if(!checkWinningStatus){
+    //         aiPlayer
+    //     }else if (checkWinningStatus === 'win'){
+    //         return;
+    //     }
+        
+    // }
+
 
     const aiPlayer = function(){
         const emptyBox = $('.grid-box:empty')
@@ -92,11 +103,8 @@ $(function(){
         }
         $(emptyCell).css('color','#8f4ab8');
         playerTurn=1;
-
-        // checkWinningStatus();
-
         cellBoxes++
-        
+
     }//aiPlayer
     //winning status function
     const checkWinningStatus = function(){
@@ -122,19 +130,18 @@ $(function(){
                     // console.log(playerScore1);
                     $('#score1').html(playerScore1);
                     turn.html("PLAYER 1 WINS");
-                    return true;
                         
                 }else{
                     playerScore2++; 
                     // console.log(playerScore2);
                     $('#score2').html(playerScore2);
                     turn.html("PLAYER 2 WINS");
-                    return true;
                     
                 } //end of if statement 
+                return 'win'
 
             //draw = if the board does not include [''] string then return draw    
-            }else if(cellBoxes === 8){
+            }else if(cellBoxes === 9){
                 turn.html("DRAW"); // print draw input on the screen   
                 cellBoxes = 0;
                 // console.log(cellBoxes);
@@ -144,13 +151,13 @@ $(function(){
         }// closing of for loop 
     } // function checkwinningstatus
         
-        //reset function
+    //reset function
     $('#game-reset-button').on('click', function(){
             //update the board array with empty strings
             board = [ '', '', '', '', '', '', '', '', ''];
             //empty grid boxes 
             $('.grid-box').html('')
-            turn.html("CHOOSE PLAYER");//print choose the player on the screen 
+            // turn.html("CHOOSE PLAYER");//print choose the player on the screen 
             // playerScore1 = 0;
             // playerScore2 = 0;
             cellBoxes = 0;
@@ -167,7 +174,7 @@ $(function(){
             $('#score1').html('0')
             $('#score2').html('0')
 
-        })
+    })
 
         
     $('#player1').one('click', function(){

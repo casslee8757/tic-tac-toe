@@ -35,7 +35,7 @@ $(function(){
         eachBoxes.one('click', function(){
         const gridId = $(this).attr("id"); //call grid id from html using attr        
         const gridToNum = parseInt(gridId) //change the string value to integer 
-        
+        // console.log(playerTurn)
             if(playerTurn === 0){
                 //printing visual inputs on the grid board 
                 $(this).html(player1); //"O"
