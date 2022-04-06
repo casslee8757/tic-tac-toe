@@ -6,7 +6,7 @@ You can play the game by clicking the link below :
 [Link](https://casslee8757.github.io/tic-tac-toe/)
 
 This game is my very first project that was built through a Software Engineering Immersive course from General Assembly in Sydney, Australia. The goal of this project is to enhance HTML, CSS and Javascript skills that we have learnt so far and to collaborate the knowledge for better task performance.
-![General features of the game](img/tictactoe.png)
+![General features of the game](img/md/tictactoe.png)
 
 **Descriptions**:
 You can enjoy this game in 2 different ways: multiplayer mode and single-player mode. The default mode is a multiplayer mode and you can play this game with your friend. You can check the type of mode in the top right-handed corner and you can simply change the mode by clicking the text.
@@ -33,3 +33,7 @@ HTML, CSS, Javascript and Jquery was used in this project.
 1. 2 different player modes ( single player and multiplayer - working on it)
 2. More colour theme
 3. add more characters (working on it)
+
+**7/4/2022**
+
+multiplayer and character modes are updated. 

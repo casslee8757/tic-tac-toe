@@ -9,7 +9,6 @@ let characterTurn = 0;
 
 
 
-
 //all winning posibilities 
 const winningPossibilities = [
     //horizontal
@@ -42,18 +41,12 @@ $(function(){
             // const  = icons[i]
 
         if (characterTurn === 0){
-            oPlayerIcon = icons
-            // oPlayerIcon = iconss;
-            // console.log(oPlayerIcon);
+            oPlayerIcon = icons;
             $(this).css('opacity', 0.5)
-            // console.log(playerTurn);
             characterTurn = 1;
         }else{
             xPlayerIcon = icons
-            // console.log(xPlayerIcon);
             $(this).css('opacity', 0.5)
-            // console.log(playerTurn);
-
             $(".selection").off("click");
 
         }//end of if    
@@ -72,9 +65,12 @@ $(function(){
             if(playerTurn === 0){
                 // oPlayerIcon = (`{icons}`)
                 // console.log(oPlayerIcon);
-                $(this).html("<img src =`${oPlayerIcon}`>");
+                $(this).css({
+                    "background": `url(${oPlayerIcon})`,
+                    "background-size": "cover",
+                    "pointer-event": "none"
+                });
                 
-                // $(this).attr( 'src', `${oPlayerIcon}`);
                 //fade in and out effect for player1 
                 turn.hide()
                 turn.fadeIn(400)
@@ -86,10 +82,13 @@ $(function(){
 
 
             }else{
-                $(this).html("<img src =`${oPlayerIcon}`>");
-                // xPlayerIcon = `{icons}`
+                $(this).css({
+                    "background": `url(${xPlayerIcon})`,
+                    "background-size": "cover",
+                    "pointer-event": "none",
+
+                });
                 
-                // $(this).css('color', '#8f4ab8') // color input 
                 //fade in and out effect for player2
                 turn.hide()
                 turn.fadeIn(400)
@@ -98,8 +97,6 @@ $(function(){
                 cellBoxes++
                 playerTurn = 0; //switch player1 to player2 
                 // console.log(playerTurn);
-
-                
 
             } //end of if else   
 
