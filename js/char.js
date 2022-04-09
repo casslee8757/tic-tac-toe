@@ -36,9 +36,8 @@ $(function(){
     const $gameSelection = function(){
         $(".selection").on("click",function(){
         const icons = $(this).attr('src')
-        // const icons = $(this)
-        // for(let i = 0; i < icons.length; i++){
-            // const  = icons[i]
+        // turn.html("TURN : PLAYER 1") 
+
 
         if (characterTurn === 0){
             oPlayerIcon = icons;
@@ -148,11 +147,12 @@ $(function(){
         
     //reset function
     $('#game-reset-button').on('click', function(){
+        console.log('clicked');
         //update the board array with empty strings
         board = [ '', '', '', '', '', '', '', '', ''];
         eachBoxes.empty(); //empty grid boxes 
         playerTurn = 0; //return to player 1 
-        turn.html("CHOOSE PLAYER");//print choose the player on the screen
+        // turn.html("CHOOSE ICON");//print choose the player on the screen
         cellBoxes = 0;
         //return to gameStart
         $gameStart();
